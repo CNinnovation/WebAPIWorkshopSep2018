@@ -45,8 +45,8 @@ namespace MyBooksApp.Controllers
             if (book == null)
                 return BadRequest();
 
-            int nextId = _booksService.GetBooks().Max(b => b.BookId) + 1;
-            book.BookId = nextId;
+           // int nextId = _booksService.GetBooks().Max(b => b.BookId) + 1;
+           // book.BookId = nextId;
             _booksService.AddBook(book);
             return CreatedAtRoute("GetBookById", new { id = book.BookId }, book);
         }
