@@ -9,8 +9,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using MyBookApp.Models;
 using MyBookApp.Services;
 using Swashbuckle.AspNetCore.Swagger;
+using Microsoft.EntityFrameworkCore;
 
 namespace MyBookApp
 {
@@ -26,7 +28,12 @@ namespace MyBookApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingleton<IBookService, BookService>();
+            //services.AddSingleton<IBookService, BookService>();
+            services.AddTransient<IBookService, BooksDBService>();
+            services.AddDbContext<BooksContext>(options =>
+            {
+                options.UseSqlServer(Configuration.GetConnectionString("BooksConnection"));
+            });
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             services.AddSwaggerGen(options =>
@@ -37,7 +44,7 @@ namespace MyBookApp
                     Title = "Books Service API",
                     Version = "v2",
                     Description = "Sample service for a Web API workshop",
-                    Contact = new Contact { Name = "Christian Nagel", Url = "https://csharp.christiannagel.com" },
+                    Contact = new Contact { Name = "Martin Kuenz", Url = "https://www.kuenz.co.at" },
                     License = new License { Name = "MIT License" }
                 });
             });
