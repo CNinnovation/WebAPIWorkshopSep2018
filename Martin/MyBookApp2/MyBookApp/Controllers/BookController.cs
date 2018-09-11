@@ -42,16 +42,17 @@ namespace MyBookApp.Controllers
 
         //PUT 
         [HttpPost]
+        [ProducesResponseType(201)]
         public ActionResult Post([FromBody] Book book)
         {
             if (book == null)
                 return BadRequest();
 
-            int nextId = _bookService.GetBooks().Max(b => b.BookId) + 1;
-            book.BookId = nextId;
+           // int nextId = _bookService.GetBooks().Max(b => b.BookId) + 1;
+           // book.BookId = nextId;
             _bookService.AddBook(book);
-            return Ok(book);
-           // return CreatedAtRoute("GetBookById", new { id = book.BookId }, book);
+            //return Ok(book);
+            return CreatedAtRoute("GetBookById", new { id = book.BookId }, book);
 
         }
     }
