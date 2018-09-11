@@ -29,7 +29,8 @@ namespace ClientApp
 
             services.AddHttpClient<MyHttpClient>(config =>
             {
-                config.BaseAddress = new Uri("http://localhost:5000");
+                //config.BaseAddress = new Uri("http://localhost:5000");
+                config.BaseAddress = new Uri("http://localhost:53255");
             }).AddTypedClient<MyHttpClient>();
 
             Container = services.BuildServiceProvider();

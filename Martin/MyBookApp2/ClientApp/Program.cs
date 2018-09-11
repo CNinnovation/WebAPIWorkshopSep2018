@@ -8,8 +8,12 @@ namespace ClientApp
     {
         static async Task Main(string[] args)
         {
+            Console.WriteLine($"Start service");
+            Console.ReadLine();
             ConfigureContainer();
             await UseHttpClientAsync();
+            Console.WriteLine($"Completed!");
+            Console.ReadLine();
         }
 
         private static void ConfigureContainer() {
@@ -20,7 +24,7 @@ namespace ClientApp
 
         private async static Task UseHttpClientAsync() {
             var client = Container.GetService<MyHttpClient>();
-            await client.ShowAllBooksAsync("/api/Books");
+            await client.ShowAllBooksAsync("/api/Book");
             Console.WriteLine();
         }
     }
