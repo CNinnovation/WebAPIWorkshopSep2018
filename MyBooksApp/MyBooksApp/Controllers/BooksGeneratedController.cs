@@ -60,6 +60,7 @@ namespace MyBooksApp.Controllers
                 return BadRequest();
             }
 
+            // new version _context.Books.Update(book);
             _context.Entry(book).State = EntityState.Modified;
 
             try

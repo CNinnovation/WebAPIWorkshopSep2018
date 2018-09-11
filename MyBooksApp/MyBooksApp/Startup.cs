@@ -60,6 +60,7 @@ namespace MyBooksApp
                 options.UseSqlServer(Configuration.GetConnectionString("BooksConnection"));
             });
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddCors();
 
             services.AddSwaggerGen(options =>
             {
@@ -85,7 +86,10 @@ namespace MyBooksApp
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseCors(builder => builder.WithOrigins("http://localhost:4200").AllowAnyMethod().AllowAnyHeader());
+
             app.UseMvc();
+            
 
             app.UseSwagger();
             app.UseSwaggerUI(options =>

@@ -1,0 +1,28 @@
+<h1>Books</h1>
+<p *ngIf="!books"><em>Loading...</em></p>
+
+<table class="table" *ngIf="books">
+  <thead>
+    <th>Id</th>
+    <th>Title</th>
+    <th>Publisher</th>
+  </thead>
+  <tbody>
+    <tr *ngFor="let book of books">
+      <td>{{book.bookId}}</td>
+      <td>{{book.title}}</td>
+      <td>{{book.publisher}}</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>Add a new book</h2>
+
+<div>Title</div>
+<input id="title" name="title" class="form-control" [(ngModel)]="title">
+<br />
+<div>Publisher</div>
+<input id="publisher" name="publisher" class="form-control" [(ngModel)]="publisher"> 
+<br />
+<button (click)="addbook()">Add the new book</button>
+
